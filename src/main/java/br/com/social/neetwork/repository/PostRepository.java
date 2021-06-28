@@ -17,7 +17,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Long> {
 			+ "(SELECT count(*) FROM UPVOTE up where up.post_id = post.id) as upvote , "
 			+ "(SELECT count(*) FROM UPVOTE up where up.post_id = post.id and up.username = :username) as upvoted "
 			+ "FROM POST post inner join USER user on post.user_id = user.id "
-			+ "ORDER BY post.date ASC",
+			+ "ORDER BY post.id DESC",
 			countQuery = "SELECT count(p.id) FROM POST p",
 			nativeQuery = true)
 	public Page<Object[]> findAllPageable(Pageable pg, @Param("username") String username);
